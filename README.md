@@ -7,7 +7,7 @@ This system opens new windows instead of deleting widgets which is much simplier
 
 -------For Team------
 
-***To create a new window***
+*****To create a new window*****
 open new file called NAME_OF_CLASS.py
 use below as template
 
@@ -35,7 +35,7 @@ root.mainloop()
 
 
 
-***To insert window into the app***
+*****To insert window into the app*****
 delete code at end of file used for debugging
 
 FROM NAME_OF_CLASS.PY IMPORT *
@@ -47,6 +47,6 @@ NAME_OF_CLASS(frame)
 
 
 
-***Data storage***
+*****Data storage*****
 All data is currently stored in data.py
 I will update this part if needed (if you don't understand)
