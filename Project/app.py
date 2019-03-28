@@ -2,7 +2,6 @@ from tkinter import *
 from tkinter import messagebox
 from data import *
 from student import student
-from lecturer import lecturer
 
 class appLogin(Frame):
 

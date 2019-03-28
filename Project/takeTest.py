@@ -1,8 +1,7 @@
 from tkinter import *
-from tkinter import messagebox
 from data import *
 from summativeTestFeedback import summativeTestFeedback
-from formativeTestFeedback import formativeTestFeedback
+from message.warningAnswerAllQuestions import warningAnswerAllQuestions
 
 class takeTest(Frame):
 
@@ -30,7 +29,7 @@ class takeTest(Frame):
 
             var_questionVariable = IntVar()
             self.var_questionsDict[Question] = var_questionVariable
-            Label(self, text = Question).grid(row=rowCounter, column=0, padx=5, pady=5)
+            Label(self, text = Question).grid(row=rowCounter, column=0, columnspan=4, padx=5, pady=5, sticky="W")
             Radiobutton(self, text=Answer1, variable=self.var_questionsDict[Question], value=5-REALAnswer).grid(row=rowCounter+1, column=0, padx=5, pady=5)
             Radiobutton(self, text=Answer2, variable=self.var_questionsDict[Question], value=6-REALAnswer).grid(row=rowCounter+1, column=1, padx=5, pady=5)
             Radiobutton(self, text=Answer3, variable=self.var_questionsDict[Question], value=7-REALAnswer).grid(row=rowCounter+1, column=2, padx=5, pady=5)
@@ -45,7 +44,10 @@ class takeTest(Frame):
         for Question, Response in self.var_questionsDict.items():
             responseList.append(Response.get())
         if 0 in responseList:
-            messagebox.showwarning("Warning", "You need to answer all questions")
+            frame3 = Toplevel(self.master)
+            frame3.title("Warning")
+            warningAnswerAllQuestions(frame3)
+            self.wait_window(frame3)
         else:
             totalQuestions = 0
             correctAnswers = 0
@@ -66,15 +68,6 @@ class takeTest(Frame):
                 summativeTestFeedback(frame3)
                 self.wait_window(frame3)
                 self.master.destroy()
-
-            elif testType == 2:
-                user = Users().getCurrentUser()
-                try:
-                    getTrials = Test_record(user = user, testNumber = testNumber).getTrials()
-                    Test_record(user=user, testNumber=testNumber, trial=getTrials[-1] + 1, response=responseList, score=correctAnswers, totalQuestions=totalQuestions).saveTestScore()
-                except:
-                    print(4)
-                    Test_record(user=user, testNumber=testNumber, response=responseList, score=correctAnswers, totalQuestions=totalQuestions).saveTestScore()
 
                 frame3 = Toplevel(self.master)
                 frame3.state('zoomed')
