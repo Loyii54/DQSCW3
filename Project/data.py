@@ -3,9 +3,9 @@ import shelve
 
 # users = shelve.open("Users.db")
 # users['users'] = {
-#     'username' : ['student', 'lecturer'],
-#     'password' : ['password', 'password'],
-#     'usertype' : ['s', 't']
+#     'username' : ['student', 'student2', 'lecturer'],
+#     'password' : ['password', 'password','password'],
+#     'usertype' : ['s', 's', 't']
 # }
 # users.sync()
 # users.close()
@@ -108,25 +108,24 @@ class Test_record():
         self.totalQuestions = totalQuestions
 
     def saveTestScore(self):
-        testRecord = shelve.open(self.datafile)
-        testRecord[self.user + str(self.testNumber) + "." + str(self.trial)] = [self.user, self.testNumber, self.trial, self.response, self.score, self.totalQuestions]
+        testRecord = shelve.open(self.datafile, writeback=True)
+        testRecord[self.user + "." + str(self.testNumber) + "." + str(self.trial)] = [self.user, self.testNumber, self.trial, self.response, self.score, self.totalQuestions]
         if self.trial == 0:
-            testRecord[self.user + str(self.testNumber)] = [0]
+            testRecord[str(self.user + '.' + str(self.testNumber))] = [0]
         else:
-            self.saveTrials()
+            testRecord[self.user + '.' + str(self.testNumber)].append(self.trial)
         testRecord.sync()
         testRecord.close()
 
-    def saveTrials(self):
+
+    def getTrials(self):
         testRecord = shelve.open(self.datafile)
-        temp = testRecord[self.user + str(self.testNumber)]
-        temp.append(self.trial)
-        testRecord[self.user + str(self.testNumber)] = temp
-        testRecord.sync()
+        contents = testRecord[self.user + '.' + str(self.testNumber)]
         testRecord.close()
+        return contents
 
     def getTestScore(self):
         testRecord = shelve.open(self.datafile)
-        contents = testRecord[self.user + str(self.testNumber) + "." + str(self.trial)]
+        contents = testRecord[self.user + "." + str(self.testNumber) + "." + str(self.trial)]
         testRecord.close()
         return contents

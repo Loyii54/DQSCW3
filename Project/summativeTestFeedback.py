@@ -23,4 +23,4 @@ class summativeTestFeedback(Frame):
         Button(self, text="Back", command=self.back).grid(row=1, column=0, padx=5, pady=5)
 
     def back(self):
-        self.master.master.destroy()
+        self.master.destroy()

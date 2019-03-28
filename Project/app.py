@@ -39,6 +39,7 @@ class appLogin(Frame):
             frame1.state('zoomed')
             frame1.title(Users().getCurrentUser())
             student(frame1)
+            self.wait_window(frame1)
 
         elif Users(username=self.var_username.get(), password=self.var_password.get()).checkData() == (1, 't'):
             Users(username=self.var_username.get(), password=self.var_password.get()).currentUser()
@@ -46,6 +47,7 @@ class appLogin(Frame):
             frame1.state('zoomed')
             frame1.title(Users().getCurrentUser())
             lecturer(frame1)
+            self.wait_window(frame1)
         else:
             messagebox.showwarning('Login failed', 'Incorrect username or password')
 

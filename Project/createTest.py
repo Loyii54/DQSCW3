@@ -48,3 +48,4 @@ class createTest(Frame):
         test_content = self.text_test.get('1.0', END)
         test_type = self.test_type.get()
         Tests(testName=test_name, testContent=test_content, testType=test_type).createTest()
+        self.master.destroy()

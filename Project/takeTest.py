@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from data import *
 from summativeTestFeedback import summativeTestFeedback
+from formativeTestFeedback import formativeTestFeedback
 
 class takeTest(Frame):
 
@@ -63,3 +64,20 @@ class takeTest(Frame):
                 frame3.state('zoomed')
                 frame3.title(Users().getCurrentUser())
                 summativeTestFeedback(frame3)
+                self.wait_window(frame3)
+                self.master.destroy()
+
+            elif testType == 2:
+                user = Users().getCurrentUser()
+                try:
+                    getTrials = Test_record(user = user, testNumber = testNumber).getTrials()
+                    Test_record(user=user, testNumber=testNumber, trial=getTrials[-1] + 1, response=responseList, score=correctAnswers, totalQuestions=totalQuestions).saveTestScore()
+                except:
+                    print(4)
+                    Test_record(user=user, testNumber=testNumber, response=responseList, score=correctAnswers, totalQuestions=totalQuestions).saveTestScore()
+
+                frame3 = Toplevel(self.master)
+                frame3.state('zoomed')
+                frame3.title(Users().getCurrentUser())
+                formativeTestFeedback(frame3)
+                self.wait_window(frame3)
