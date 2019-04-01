@@ -1,7 +1,8 @@
 import shelve
+import datetime
 # USE THIS TO INITIALIZE THE USERS student AND lecturer
 
-# users = shelve.open("Users.db")
+# users = shelve.open("Data/Users.db")
 # users['users'] = {
 #     'username' : ['student', 'student2', 'lecturer'],
 #     'password' : ['password', 'password','password'],
@@ -12,7 +13,7 @@ import shelve
 
 class Users():
     def __init__(self, username = '', password = ''):
-        self.datafile = "Users.db"
+        self.datafile = "Data/Users.db"
         self.username = username
         self.password = password
 
@@ -50,18 +51,19 @@ class Users():
 
 # initialize Tests.db
 
-# tests = shelve.open("Tests.db")
+# tests = shelve.open("Data/Tests.db")
 # tests['Tests'] = []
 # tests.sync()
 # tests.close()
 
 class Tests():
-    def __init__(self, testNumber=0, testName='', testContent='', testType=''):
-        self.datafile = "Tests.db"
+    def __init__(self, testNumber=0, testName='', testContent='', testType='', deadline=datetime.datetime(2019, 4, 1, 00, 00)):
+        self.datafile = "Data/Tests.db"
         self.testNumber = testNumber
         self.testName = testName
         self.testContent = testContent
         self.testType = testType
+        self.deadline = deadline
 
     def getNumberOfTests(self):
         tests = shelve.open(self.datafile)
@@ -73,7 +75,7 @@ class Tests():
         tests = shelve.open(self.datafile)
         numberOfTests = self.getNumberOfTests()
         temp = tests['Tests']
-        temp.append([numberOfTests, self.testName, self.testContent, self.testType])
+        temp.append([numberOfTests, self.testName, self.testContent, self.testType, self.deadline])
         tests['Tests'] = temp
         tests.sync()
         tests.close()
@@ -86,7 +88,7 @@ class Tests():
 
     def currentTest(self):
         tests = shelve.open(self.datafile)
-        tests['currentTest'] = [self.testNumber, self.testName, self.testContent, self.testType]
+        tests['currentTest'] = [self.testNumber, self.testName, self.testContent, self.testType, self.deadline]
         tests.sync()
         tests.close()
 
@@ -99,7 +101,7 @@ class Tests():
 
 class Test_record():
     def __init__(self, user='', testNumber=0, trial=0, response=[], score=0, totalQuestions=0):
-        self.datafile = "Test_records.db"
+        self.datafile = "Data/Test_records.db"
         self.user = user
         self.testNumber = testNumber
         self.trial = trial

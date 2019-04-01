@@ -1,58 +1,44 @@
 from tkinter import *
-from tkinter import messagebox
 from data import *
+""" Import all frames in the application here """
 from student import student
+from login import login
+from takeTest import takeTest
+from summativeTestFeedback import summativeTestFeedback
 
-class appLogin(Frame):
+class App(Tk):
+    def __init__(self):
+        Tk.__init__(self)
 
-    def __init__(self, master):
-        Frame.__init__(self,master)
-        self.grid()
-        self.login()
+        self.current_frame = None
+        self.pages = {'Login': login,
+                 'Student': student,
+                 'takeTest': takeTest,
+                 'summativeTestFeedback': summativeTestFeedback,
+                 }
 
-    def login(self):
-        root.grid_columnconfigure(0, weight=1)
-        root.grid_rowconfigure(0, weight=1)
-        self.var_username = StringVar()
-        self.var_username.set('student')
-        self.var_password = StringVar()
-        self.var_password.set('password')
+        self.switch_frame('Login')
 
-        label_username = Label(self, text='Username: ')
-        label_password = Label(self, text='Password: ')
-        label_username.grid(row=0, column=0, padx=5, pady=5)
-        label_password.grid(row=1, column=0, padx=5, pady=5)
+    def switch_frame(self, frame_name):
+        """Destroys current frame and replaces it with a new one."""
+        if self.current_frame is not None:
+            self.current_frame.destroy()
 
-        enter_username = Entry(self, textvariable=self.var_username)
-        enter_password = Entry(self, textvariable=self.var_password, show='*')
-        enter_username.grid(row=0, column=1, padx=5, pady=5)
-        enter_password.grid(row=1, column=1, padx=5, pady=5)
+        new_frame = self.pages[frame_name](self)
+        self.current_frame = new_frame
 
-        self.button_login = Button(self, text="Login", command=self.login_command)
-        self.button_login.grid(row=2, column=0, columnspan=2, padx=5, pady=5)
-
-    def login_command(self):
-        if Users(username=self.var_username.get(), password=self.var_password.get()).checkData() == (1, 's'):
-            Users(username=self.var_username.get(), password=self.var_password.get()).currentUser()
-            frame1 = Toplevel(root)
-            frame1.state('zoomed')
-            frame1.title(Users().getCurrentUser())
-            student(frame1)
-            self.wait_window(frame1)
-
-        elif Users(username=self.var_username.get(), password=self.var_password.get()).checkData() == (1, 't'):
-            Users(username=self.var_username.get(), password=self.var_password.get()).currentUser()
-            frame1 = Toplevel(root)
-            frame1.state('zoomed')
-            frame1.title(Users().getCurrentUser())
-            lecturer(frame1)
-            self.wait_window(frame1)
+        if frame_name == 'Login':
+            self.current_frame.pack(side=TOP, fill='both', expand=True)
         else:
-            messagebox.showwarning('Login failed', 'Incorrect username or password')
+            self.current_frame.pack(side=TOP, fill='both', expand=True)
 
 
-root = Tk()
-root.title("Login")
-root.state('zoomed')
-app = appLogin(root)
-root.mainloop()
+
+def main():
+    app = App()
+    app.title('Application')
+    app.state('zoomed')
+    app.mainloop()
+
+if __name__ == '__main__':
+    main()
