@@ -23,7 +23,7 @@ class login(Frame):
 
     def main(self):
         self.var_username = StringVar()
-        self.var_username.set('lecturer')
+        self.var_username.set('student')
         self.var_password = StringVar()
         self.var_password.set('password')
 

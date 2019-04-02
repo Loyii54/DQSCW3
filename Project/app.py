@@ -5,6 +5,7 @@ from student import student
 from login import login
 from takeTest import takeTest
 from summativeTestFeedback import summativeTestFeedback
+from viewAnswerStudent import viewAnswerStudent
 
 class App(Tk):
     def __init__(self):
@@ -15,6 +16,7 @@ class App(Tk):
                  'Student': student,
                  'takeTest': takeTest,
                  'summativeTestFeedback': summativeTestFeedback,
+                 'viewAnswerStudent': viewAnswerStudent,
                  }
 
         self.switch_frame('Login')
@@ -27,10 +29,7 @@ class App(Tk):
         new_frame = self.pages[frame_name](self)
         self.current_frame = new_frame
 
-        if frame_name == 'Login':
-            self.current_frame.pack(side=TOP, fill='both', expand=True)
-        else:
-            self.current_frame.pack(side=TOP, fill='both', expand=True)
+        self.current_frame.pack(side=TOP, fill='both', expand=True)
 
 
 

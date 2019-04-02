@@ -30,8 +30,10 @@ class student(Frame):
 
         rowCounter=1
         self.buttonList = []
+        self.viewTestButtonList = []
         if range(Tests().getNumberOfTests()) == range(0,0):
             Label(self.frameInCanvas, text="You have no Tests.").grid(row=rowCounter, column=0, padx=5, pady=5)
+
         else:
             for i in range(Tests().getNumberOfTests()):
                 tests = Tests().getTest()
@@ -49,14 +51,18 @@ class student(Frame):
                         Test_record(user=Users().getCurrentUser(), testNumber=i).getTrials()
                         self.buttonList.append(Button(self.frameInCanvas, text='Take test',state="disabled", command=lambda i=i: self.takeTest(i)))
                         self.buttonList[i].grid(row=rowCounter, column=1, padx=5, pady=5)
+
                     except:
                         self.buttonList.append(Button(self.frameInCanvas, text='Take test',command=lambda i=i: self.takeTest(i)))
                         self.buttonList[i].grid(row=rowCounter, column=1, padx=5, pady=5)
+
                 else:
                     self.buttonList.append(Button(self.frameInCanvas, text='Past Deadline',state="disabled", command=lambda i=i: self.takeTest(i)))
                     self.buttonList[i].grid(row=rowCounter, column=1, padx=5, pady=5)
-                rowCounter += 1
+                    self.viewTestButtonList.append(Button(self.frameInCanvas, text='View Score', command=lambda i=i: self.viewScore(i)))
+                    self.viewTestButtonList[i].grid(row=rowCounter, column=2, padx=5, pady=5)
 
+                rowCounter += 1
 
         Button(self.frameInCanvas, text="Logout", command=self.logout).grid(row=rowCounter+1, column=0, padx=5, pady=5)
 
@@ -68,6 +74,15 @@ class student(Frame):
             messagebox.showwarning('Not Implemented', 'This has not been implemented yet')
         else:
             self.master.switch_frame('takeTest')
+
+    def viewScore(self, testNumber):
+        tests = Tests().getTest()
+        testNumber, testName, testContent, testType, deadline = tests[testNumber]
+        Tests(testNumber=testNumber, testName=testName, testContent=testContent, testType=testType, deadline=deadline).currentTest()
+        if testType == 2:
+            messagebox.showwarning('Not Implemented', 'This has not been implemented yet')
+        else:
+            self.master.switch_frame('viewAnswerStudent')
 
     def refresh(self):
         self.master.switch_frame('Student')

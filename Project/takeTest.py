@@ -48,11 +48,11 @@ class takeTest(Frame):
                 var_questionVariable = IntVar()
                 self.var_questionsDict[Question] = var_questionVariable
                 Label(self.frameInCanvas, text = Question).grid(row=rowCounter, column=0, columnspan=4, padx=5, pady=5, sticky="W")
-                Radiobutton(self.frameInCanvas, text=Answer1, variable=self.var_questionsDict[Question], value=5-REALAnswer).grid(row=rowCounter+1, column=0, padx=5, pady=5)
-                Radiobutton(self.frameInCanvas, text=Answer2, variable=self.var_questionsDict[Question], value=6-REALAnswer).grid(row=rowCounter+1, column=1, padx=5, pady=5)
-                Radiobutton(self.frameInCanvas, text=Answer3, variable=self.var_questionsDict[Question], value=7-REALAnswer).grid(row=rowCounter+1, column=2, padx=5, pady=5)
-                Radiobutton(self.frameInCanvas, text=Answer4, variable=self.var_questionsDict[Question], value=8-REALAnswer).grid(row=rowCounter+1, column=3, padx=5, pady=5)
-                rowCounter+=2
+                Radiobutton(self.frameInCanvas, text='A) '+Answer1, variable=self.var_questionsDict[Question], value=5-REALAnswer).grid(row=rowCounter+1, column=0, padx=5, pady=5)
+                Radiobutton(self.frameInCanvas, text='B) '+Answer2, variable=self.var_questionsDict[Question], value=6-REALAnswer).grid(row=rowCounter+1, column=1, padx=5, pady=5)
+                Radiobutton(self.frameInCanvas, text='C) '+Answer3, variable=self.var_questionsDict[Question], value=7-REALAnswer).grid(row=rowCounter+1, column=2, padx=5, pady=5)
+                Radiobutton(self.frameInCanvas, text='D) '+Answer4, variable=self.var_questionsDict[Question], value=8-REALAnswer).grid(row=rowCounter+1, column=3, padx=5, pady=5)
+                rowCounter += 2
 
             Button(self.frameInCanvas, text='Submit', command=self.testSubmit).grid(row=rowCounter, column=1, columnspan=2, padx=5, pady=5)
 
