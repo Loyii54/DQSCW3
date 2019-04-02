@@ -1,23 +1,30 @@
 import shelve
 import datetime
-# USE THIS TO INITIALIZE THE USERS student AND lecturer
 
-# users = shelve.open("Data/Users.db")
-# users['users'] = {
-#     'username' : ['student', 'student2', 'lecturer'],
-#     'password' : ['password', 'password','password'],
-#     'usertype' : ['s', 's', 't']
-# }
-# users.sync()
-# users.close()
+# INITIALISE users
+try:
+    users = shelve.open("Data/Users.db")
+    contents = users['users']
+    users.close()
+except:
+    users = shelve.open("Data/Users.db")
+    users['users'] = {
+        'username' : ['student', 'student2', 'lecturer'],
+        'password' : ['password', 'password','password'],
+        'usertype' : ['s', 's', 't']
+    }
+    users.sync()
+    users.close()
 
 class Users():
     def __init__(self, username = '', password = ''):
+        """Contains database for User information"""
         self.datafile = "Data/Users.db"
         self.username = username
         self.password = password
 
     def openData(self):
+        """returns lists of usernames, passwords and usertypes"""
         users = shelve.open(self.datafile)
         userinfo = users['users']
         usernames = userinfo['username']
@@ -49,12 +56,17 @@ class Users():
         users.close()
         return currentUser
 
-# initialize Tests.db
+#INITIALISE tests
+try:
+    tests = shelve.open("Data/Tests.db")
+    contents = tests['Tests']
+    shelve.close()
+except:
+    tests = shelve.open("Data/Tests.db")
+    tests['Tests'] = []
+    tests.sync()
+    tests.close()
 
-# tests = shelve.open("Data/Tests.db")
-# tests['Tests'] = []
-# tests.sync()
-# tests.close()
 
 class Tests():
     def __init__(self, testNumber=0, testName='', testContent='', testType='', deadline=datetime.datetime(2019, 4, 1, 00, 00)):
