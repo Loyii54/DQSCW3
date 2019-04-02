@@ -7,6 +7,9 @@ from data import *
 class takeTest(Frame):
 
     def __init__(self, master):
+        """
+            Create a canvas in the Frame such that a scrollbar can be put into the window, then create a frame in the canvas for the widgets.
+        """
         Frame.__init__(self,master)
 
         self.canvas = Canvas(self, borderwidth=0)
@@ -24,19 +27,27 @@ class takeTest(Frame):
         self.main()
 
     def main(self):
+        """
+            Tkinter widgets to be put in the frame in the canvas.
+        """
         testNumber, testName, testContent, testType, deadline = Tests().getCurrentTest()
 
         if datetime.datetime.now() > deadline:
+            #Check if past deadline, if so switch frame to Student
+            Tests().currentTest()
             messagebox.showwarning('Past Deadline', 'It is already past deadline!')
             self.master.switch_frame('Student')
         else:
+            #Get contents of test
             cleanTestContent = testContent.rstrip()
             testQuestions = cleanTestContent.split('\n')
 
-
+            #Initialise for looping over questions
             rowCounter = 1
             self.var_questionsDict = {}
+
             for question in testQuestions:
+                #Looping over questions and creating labels and radiobuttons for each question
                 questionList = question.split(', ')
                 Question = questionList[0]
                 Answer1 = questionList[1]
@@ -59,20 +70,28 @@ class takeTest(Frame):
 
 
     def testSubmit(self):
+        """
+            Checks if valid, if so save test results and switch fame to summativeTestFeedback / formativeTestFeedback(NOT IMPLEMENTED)
+        """
         deadline = Tests().getCurrentTest()[4]
+
         if datetime.datetime.now() > deadline:
+            #Check if past deadline, if so switch frame to Student
             Tests().currentTest()
             messagebox.showwarning('Past Deadline', 'It is already past deadline!')
             self.master.switch_frame('Student')
+
         else:
             responseList =[]
             for Question, Response in self.var_questionsDict.items():
                 responseList.append(Response.get())
 
             if 0 in responseList:
+                #Checks if all questions are answered
                 messagebox.showwarning('Warning', 'Please answer all questions')
 
             else:
+                #Loops over each question response and adds up totalQuestion and correctAnswers, then save the test response using Test_record.saveTestScore()
                 totalQuestions = 0
                 correctAnswers = 0
 
@@ -84,20 +103,20 @@ class takeTest(Frame):
                 testNumber = int(Tests().getCurrentTest()[0])
                 testType = int(Tests().getCurrentTest()[3])
                 if testType == 1:
+                    #Switch frame to summativeTestFeedback if test is a summative test
                     user = Users().getCurrentUser()
                     Test_record(user=user, testNumber=testNumber, response=responseList, score=correctAnswers, totalQuestions=totalQuestions).saveTestScore()
 
                     self.master.switch_frame('summativeTestFeedback')
 
                 else:
+                    #Switch frame to formativeTestFeedback if test is a formative test (NOT IMPLEMENTED)
                     messagebox.showwarning('Not Implemented', 'This has not been implemented yet')
                     # formativeTestFeedback.py is not implemented yet
                     # self.master.switch_frame('formativeTestFeedback')
 
-
-    def quit(self):
-        self.master.switch_frame('summativeTestFeedback')
-
     def onFrameConfigure(self, event):
-        '''Reset the scroll region to encompass the inner frame'''
+        '''
+            Reset the scroll region to encompass the inner frame
+        '''
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))

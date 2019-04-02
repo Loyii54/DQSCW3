@@ -9,7 +9,9 @@ from viewAnswerStudent import viewAnswerStudent
 
 class App(Tk):
     def __init__(self):
-        """Initialise the frames imported and move Login Frame to front."""
+        """
+            Initialise the frames imported and move Login Frame to front.
+        """
         Tk.__init__(self)
 
         self.current_frame = None
@@ -23,7 +25,9 @@ class App(Tk):
         self.switch_frame('Login')
 
     def switch_frame(self, frame_name):
-        """Destroys current frame and replaces it with a new one."""
+        """
+            Destroys current frame and replaces it with a new one.
+        """
         if self.current_frame is not None:
             self.current_frame.destroy()
 

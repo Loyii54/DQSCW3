@@ -6,6 +6,9 @@ from data import *
 class viewAnswerStudent(Frame):
 
     def __init__(self, master):
+        """
+            Create a canvas in the Frame such that a scrollbar can be put into the window, then create a frame in the canvas for the widgets.
+        """
         Frame.__init__(self,master)
 
         self.canvas = Canvas(self, borderwidth=0)
@@ -23,8 +26,14 @@ class viewAnswerStudent(Frame):
         self.main()
 
     def main(self):
+        """
+            Tkinter widgets to be put in the frame in the canvas.
+        """
+        #Initialise for looping over questions
         rowCounter = 1
+
         try:
+            #If user has taken the test, display test score
             user = Users().getCurrentUser()
             testNumber = Tests().getCurrentTest()[0]
             trials = Test_record(user=user, testNumber=testNumber).getTrials()
@@ -37,12 +46,17 @@ class viewAnswerStudent(Frame):
             var_correctAnswers.set("You scored: " + str(correctAnswers) + '/' + str(totalQuestions))
             Label(self.frameInCanvas, textvariable=var_correctAnswers).grid(row=0, column=0, padx=5, pady=5, sticky='W')
 
+            #Obtain test information
             testNumber, testName, testContent, testType, deadline = Tests().getCurrentTest()
             cleanTestContent = testContent.rstrip()
             testQuestions = cleanTestContent.split('\n')
 
+            #Initialise for looping over questions
             questionCounter = 0
+
             for question in testQuestions:
+                #Loop over questions and create labels showing the questions and answers.
+                #If user has taken the test, display test answers as well as response
                 questionList = question.split(', ')
                 Question = questionList[0]
                 Answer1 = questionList[1]
@@ -71,13 +85,17 @@ class viewAnswerStudent(Frame):
                 questionCounter += 1
 
         except:
+            #If user has not taken the test, display "You did not attempt this test."
             Label(self.frameInCanvas, text='You did not attempt this test.').grid(row=0, column=0, padx=5, pady=5, sticky='W')
 
+            #Obtain test information
             testNumber, testName, testContent, testType, deadline = Tests().getCurrentTest()
             cleanTestContent = testContent.rstrip()
             testQuestions = cleanTestContent.split('\n')
 
             for question in testQuestions:
+                #Loop over questions and create labels showing the questions and answers.
+                #If user has not taken the test, display test answers ONLY
                 questionList = question.split(', ')
                 Question = questionList[0]
                 Answer1 = questionList[1]
@@ -99,12 +117,17 @@ class viewAnswerStudent(Frame):
                 rowCounter += 3
 
         finally:
-
             Button(self.frameInCanvas, text="Back", command=self.back).grid(row=rowCounter, column=0, padx=5, pady=5)
 
     def back(self):
+        """
+            Clear currentTest() and switch frame to student
+        """
+        Tests().currentTest()
         self.master.switch_frame('Student')
 
     def onFrameConfigure(self, event):
-        '''Reset the scroll region to encompass the inner frame'''
+        '''
+            Reset the scroll region to encompass the inner frame
+        '''
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
