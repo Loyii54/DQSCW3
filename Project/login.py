@@ -5,6 +5,7 @@ from data import *
 class login(Frame):
 
     def __init__(self, master):
+        """Create a canvas in the Frame such that a scrollbar can be put into the window, then create a frame in the canvas for the widgets."""
         Frame.__init__(self,master)
 
         self.canvas = Canvas(self, borderwidth=0)
@@ -22,6 +23,7 @@ class login(Frame):
         self.main()
 
     def main(self):
+        """Tkinter widgets to be put in the frame in the canvas."""
         self.var_username = StringVar()
         self.var_username.set('student')
         self.var_password = StringVar()
@@ -41,6 +43,7 @@ class login(Frame):
         self.button_login.grid(row=2, column=0, columnspan=2, padx=5, pady=5)
 
     def login_command(self):
+        """Checks if username and password is valid and splits to student or lecturer frame depending on the input"""
         if Users(username=self.var_username.get(), password=self.var_password.get()).checkData() == (1, 's'):
             Users(username=self.var_username.get()).currentUser()
             self.master.switch_frame('Student')

@@ -9,6 +9,7 @@ from viewAnswerStudent import viewAnswerStudent
 
 class App(Tk):
     def __init__(self):
+        """Initialise the frames imported and move Login Frame to front."""
         Tk.__init__(self)
 
         self.current_frame = None

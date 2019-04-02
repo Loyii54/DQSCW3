@@ -6,6 +6,7 @@ from data import *
 class student(Frame):
 
     def __init__(self, master):
+        """Create a canvas in the Frame such that a scrollbar can be put into the window, then create a frame in the canvas for the widgets."""
         Frame.__init__(self,master)
 
         self.canvas = Canvas(self, borderwidth=0)

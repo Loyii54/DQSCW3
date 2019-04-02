@@ -35,7 +35,7 @@ class viewAnswerStudent(Frame):
             totalQuestions = testRetrieve[5]
             var_correctAnswers = StringVar()
             var_correctAnswers.set("You scored: " + str(correctAnswers) + '/' + str(totalQuestions))
-            Label(self.frameInCanvas, textvariable=var_correctAnswers).grid(row=0, column=0, padx=5, pady=5)
+            Label(self.frameInCanvas, textvariable=var_correctAnswers).grid(row=0, column=0, padx=5, pady=5, sticky='W')
 
             testNumber, testName, testContent, testType, deadline = Tests().getCurrentTest()
             cleanTestContent = testContent.rstrip()
@@ -50,26 +50,28 @@ class viewAnswerStudent(Frame):
                 Answer3 = questionList[3]
                 Answer4 = questionList[4]
                 REALAnswer = int(questionList[5])
-                answerList = ['A) '+Answer1,' B) '+Answer2, 'C) '+Answer3, 'D) '+Answer4]
+                REALAnswerKey = {1:[4,5,6,7], 2:[3,4,5,6], 3:[2,3,4,5], 4:[1,2,3,4]}
+                answerList = ['A) '+Answer1,'B) '+Answer2, 'C) '+Answer3, 'D) '+Answer4]
 
                 correctAnswer = StringVar()
                 correctAnswer.set("Correct answer is: " + answerList[REALAnswer-1])
                 youAnswered = StringVar()
-                youAnswered.set("You answered: " + answerList[(REALAnswer+3)-responseList[questionCounter]])
 
-                Label(self.frameInCanvas, text=Question).grid(row=rowCounter, column=0, columnspan=4, padx=5, pady=5, sticky="W")
+                youAnswered.set("You answered: " + answerList[REALAnswerKey[REALAnswer].index(responseList[questionCounter])])
+
+                Label(self.frameInCanvas, text=Question).grid(row=rowCounter, column=0, columnspan=4, padx=5, pady=5, sticky='W')
                 Label(self.frameInCanvas, text='A) '+Answer1).grid(row=rowCounter+1, column=0, padx=5, pady=5)
                 Label(self.frameInCanvas, text='B) '+Answer2).grid(row=rowCounter+1, column=1, padx=5, pady=5)
                 Label(self.frameInCanvas, text='C) '+Answer3).grid(row=rowCounter+1, column=2, padx=5, pady=5)
                 Label(self.frameInCanvas, text='D) '+Answer4).grid(row=rowCounter+1, column=3, padx=5, pady=5)
-                Label(self.frameInCanvas, textvariable=correctAnswer).grid(row=rowCounter+2, column=0, padx=5, pady=5)
-                Label(self.frameInCanvas, textvariable=youAnswered).grid(row=rowCounter+2, column=1, padx=5, pady=5)
+                Label(self.frameInCanvas, textvariable=correctAnswer).grid(row=rowCounter+2, column=0, columnspan=3, padx=5, pady=5, sticky='W')
+                Label(self.frameInCanvas, textvariable=youAnswered).grid(row=rowCounter+2, column=4, padx=5, pady=5, sticky='W')
 
                 rowCounter += 3
                 questionCounter += 1
 
         except:
-            Label(self.frameInCanvas, text='You did not attempt this test.').grid(row=0, column=0, padx=5, pady=5)
+            Label(self.frameInCanvas, text='You did not attempt this test.').grid(row=0, column=0, padx=5, pady=5, sticky='W')
 
             testNumber, testName, testContent, testType, deadline = Tests().getCurrentTest()
             cleanTestContent = testContent.rstrip()
@@ -87,12 +89,12 @@ class viewAnswerStudent(Frame):
                 correctAnswer = StringVar()
                 correctAnswer.set("Correct answer is: " + answerList[REALAnswer-1])
 
-                Label(self.frameInCanvas, text=Question).grid(row=rowCounter, column=0, columnspan=4, padx=5, pady=5, sticky="W")
+                Label(self.frameInCanvas, text=Question).grid(row=rowCounter, column=0, columnspan=4, padx=5, pady=5, sticky='W')
                 Label(self.frameInCanvas, text='A) '+Answer1).grid(row=rowCounter+1, column=0, padx=5, pady=5)
                 Label(self.frameInCanvas, text='B) '+Answer2).grid(row=rowCounter+1, column=1, padx=5, pady=5)
                 Label(self.frameInCanvas, text='C) '+Answer3).grid(row=rowCounter+1, column=2, padx=5, pady=5)
                 Label(self.frameInCanvas, text='D) '+Answer4).grid(row=rowCounter+1, column=3, padx=5, pady=5)
-                Label(self.frameInCanvas, textvariable=correctAnswer).grid(row=rowCounter+2, column=0, padx=5, pady=5)
+                Label(self.frameInCanvas, textvariable=correctAnswer).grid(row=rowCounter+2, column=0, columnspan=3, padx=5, pady=5, sticky='W')
 
                 rowCounter += 3
 
