@@ -6,6 +6,8 @@ from login import login
 from takeTest import takeTest
 from summativeTestFeedback import summativeTestFeedback
 from viewAnswerStudent import viewAnswerStudent
+from lecturer import lecturer
+from createTest import createTest
 
 class App(Tk):
     def __init__(self):
@@ -20,6 +22,8 @@ class App(Tk):
                  'takeTest': takeTest,
                  'summativeTestFeedback': summativeTestFeedback,
                  'viewAnswerStudent': viewAnswerStudent,
+                 "Lecturer": lecturer,
+                 "createTest": createTest,
                  }
 
         self.switch_frame('Login')

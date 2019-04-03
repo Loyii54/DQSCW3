@@ -58,8 +58,8 @@ class login(Frame):
         elif Users(username=self.var_username.get(), password=self.var_password.get()).checkData() == (1, 't'):
             #If username and password is correct and user is a Lecturer
             #NOT FINISHED
-            messagebox.showwarning('Warning', 'This not implemented yet.')
             Users(username=self.var_username.get()).currentUser()
+            self.master.switch_frame('Lecturer')
 
         else:
             #If something is incorrect
