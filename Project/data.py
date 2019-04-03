@@ -53,6 +53,29 @@ class Users():
         else:
             return 0
 
+    def viewUser(self):
+        """
+            Changes ['viewuser'] to the current user that has logged in
+                i.e. 'student'
+
+            REQUIRED: username
+        """
+        users = shelve.open(self.datafile)
+        users['viewuser'] = self.username
+        users.sync()
+        users.close()
+
+    def getViewUser(self):
+        """
+            Returns whats inside ['viewuser'] (the current user that has logged in)
+
+            REQUIRED: NONE
+        """
+        users = shelve.open(self.datafile)
+        currentUser = users['viewuser']
+        users.close()
+        return currentUser
+
     def currentUser(self):
         """
             Changes ['currentuser'] to the current user that has logged in
@@ -164,7 +187,9 @@ class Tests():
             REQUIRED: testNumber, testName, testContent, testType, deadline
         """
         tests = shelve.open(self.datafile)
-        tests['Tests'] = [self.testNumber ,self.testName, self.testContent, self.testType, self.deadline]
+        temp = tests['Tests']
+        temp[self.testNumber] = [self.testNumber ,self.testName, self.testContent, self.testType, self.deadline]
+        tests['Tests'] = temp
         tests.sync()
         tests.close()
 

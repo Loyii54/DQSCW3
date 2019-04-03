@@ -29,7 +29,13 @@ class lecturer(Frame):
         Label(self.frameInCanvas, text="Create test").grid(row=1, column=0, padx=5, pady=5)
         Button(self.frameInCanvas, text="Create", command=self.createTest).grid(row=1, column=1,padx=5, pady=5)
 
-        Button(self.frameInCanvas, text="Logout", command=self.logout).grid(row=2, column=0, padx=5, pady=5)
+        Label(self.frameInCanvas, text="Modify test").grid(row=2, column=0, padx=5, pady=5)
+        Button(self.frameInCanvas, text="Modify", command=self.ModifyTest).grid(row=2, column=1, padx=5, pady=5)
+
+        Label(self.frameInCanvas, text="View test").grid(row=3, column=0, padx=5, pady=5)
+        Button(self.frameInCanvas, text="View", command=self.ViewTest).grid(row=3, column=1, padx=5, pady=5)
+
+        Button(self.frameInCanvas, text="Logout", command=self.logout).grid(row=4, column=0, padx=5, pady=5)
 
 
     def logout(self):
@@ -42,6 +48,12 @@ class lecturer(Frame):
         tests.sync()
         tests.close()
         self.master.switch_frame('createTest')
+
+    def ModifyTest(self):
+        self.master.switch_frame('modifyTest')
+
+    def ViewTest(self):
+        self.master.switch_frame('viewTest')
 
     def onFrameConfigure(self, event):
         '''Reset the scroll region to encompass the inner frame'''

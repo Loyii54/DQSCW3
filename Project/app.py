@@ -9,6 +9,11 @@ from viewAnswerStudent import viewAnswerStudent
 from lecturer import lecturer
 from createTest import createTest
 from formativeTestFeedback import formativeTestFeedback
+from Modify import Modify
+from modifyTest import modifyTest
+from viewTest import viewTest
+from viewTestSummativeLecturer import viewTestSummativeLecturer
+from viewIndividualTestSummativeLecturer import viewIndividualTestSummativeLecturer
 
 class App(Tk):
     def __init__(self):
@@ -26,6 +31,11 @@ class App(Tk):
                  "Lecturer": lecturer,
                  "createTest": createTest,
                  'formativeTestFeedback': formativeTestFeedback,
+                 'modify': Modify,
+                 'modifyTest': modifyTest,
+                 'viewTest': viewTest,
+                 'viewTestSummativeLecturer': viewTestSummativeLecturer,
+                 'viewIndividualTestSummativeLecturer': viewIndividualTestSummativeLecturer
                  }
 
         self.switch_frame('Login')
