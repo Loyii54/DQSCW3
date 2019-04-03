@@ -66,6 +66,9 @@ class student(Frame):
                         Test_record(user=Users().getCurrentUser(), testNumber=i).getTrials()
                         self.buttonList.append(Button(self.frameInCanvas, text='Take test',state="disabled", command=lambda i=i: self.takeTest(i)))
                         self.buttonList[i].grid(row=rowCounter, column=1, padx=5, pady=5)
+                        if testType == 2:
+                            self.viewTestButtonList.append(Button(self.frameInCanvas, text='View Score', command=lambda i=i: self.viewScore(i)))
+                            self.viewTestButtonList[i].grid(row=rowCounter, column=2, padx=5, pady=5)
 
                     except:
                         self.buttonList.append(Button(self.frameInCanvas, text='Take test',command=lambda i=i: self.takeTest(i)))
@@ -88,11 +91,8 @@ class student(Frame):
         tests = Tests().getTest()
         testNumber, testName, testContent, testType, deadline = tests[testNumber]
         Tests(testNumber=testNumber, testName=testName, testContent=testContent, testType=testType, deadline=deadline).currentTest()
-        if testType == 2:
-            #Delete this if-else once Formative assessment is created, keep self.master.switch_frame('takeTest')
-            messagebox.showwarning('Not Implemented', 'This has not been implemented yet')
-        else:
-            self.master.switch_frame('takeTest')
+
+        self.master.switch_frame('takeTest')
 
     def viewScore(self, testNumber):
         """
@@ -101,11 +101,8 @@ class student(Frame):
         tests = Tests().getTest()
         testNumber, testName, testContent, testType, deadline = tests[testNumber]
         Tests(testNumber=testNumber, testName=testName, testContent=testContent, testType=testType, deadline=deadline).currentTest()
-        if testType == 2:
-            #Delete this if-else once Formative assessment is created, keep self.master.switch_frame('takeTest')
-            messagebox.showwarning('Not Implemented', 'This has not been implemented yet')
-        else:
-            self.master.switch_frame('viewAnswerStudent')
+
+        self.master.switch_frame('viewAnswerStudent')
 
     def refresh(self):
         """

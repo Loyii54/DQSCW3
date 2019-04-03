@@ -110,10 +110,14 @@ class takeTest(Frame):
                     self.master.switch_frame('summativeTestFeedback')
 
                 else:
-                    #Switch frame to formativeTestFeedback if test is a formative test (NOT IMPLEMENTED)
-                    messagebox.showwarning('Not Implemented', 'This has not been implemented yet')
-                    # formativeTestFeedback.py is not implemented yet
-                    # self.master.switch_frame('formativeTestFeedback')
+                    user=Users().getCurrentUser()
+                    try:
+                        trial = Test_record(user=user, testNumber=testNumber).getTrials()[-1] + 1
+                        Test_record(user=user, testNumber=testNumber, trial=trial, response=responseList, score=correctAnswers, totalQuestions=totalQuestions).saveTestScore()
+                    except:
+                        Test_record(user=user, testNumber=testNumber, response=responseList, score=correctAnswers, totalQuestions=totalQuestions).saveTestScore()
+
+                    self.master.switch_frame('formativeTestFeedback')
 
     def onFrameConfigure(self, event):
         '''

@@ -8,6 +8,7 @@ from summativeTestFeedback import summativeTestFeedback
 from viewAnswerStudent import viewAnswerStudent
 from lecturer import lecturer
 from createTest import createTest
+from formativeTestFeedback import formativeTestFeedback
 
 class App(Tk):
     def __init__(self):
@@ -24,6 +25,7 @@ class App(Tk):
                  'viewAnswerStudent': viewAnswerStudent,
                  "Lecturer": lecturer,
                  "createTest": createTest,
+                 'formativeTestFeedback': formativeTestFeedback,
                  }
 
         self.switch_frame('Login')
