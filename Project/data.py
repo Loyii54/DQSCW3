@@ -160,6 +160,8 @@ class Tests():
     def modifyTest(self):
         """
             Modify given test
+
+            REQUIRED: testNumber, testName, testContent, testType, deadline
         """
         tests = shelve.open(self.datafile)
         tests['Tests'] = [self.testNumber ,self.testName, self.testContent, self.testType, self.deadline]
