@@ -157,6 +157,14 @@ class Tests():
         tests.close()
         return contents
 
+    def modifyTest(self):
+        """
+            Modify given test
+        """
+        tests = shelve.open(self.datafile)
+        tests['Tests'] = [self.testNumber ,self.testName, self.testContent, self.testType, self.deadline]
+        tests.sync()
+        tests.close()
 
 class Test_record():
     def __init__(self, user='', testNumber=0, trial=0, response=[], score=0, totalQuestions=0):
