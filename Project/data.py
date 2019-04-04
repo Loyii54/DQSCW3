@@ -2,7 +2,7 @@ import shelve
 import datetime
 
 # INITIALISE users
-# users = shelve.open("Data/Users.db")
+# users = shelve.open("Project/Data/Users.db")
 # users['users'] = {
 #     'username' : ['student', 'student2', 'lecturer'],
 #     'password' : ['password', 'password','password'],
@@ -16,7 +16,7 @@ class Users():
         """
             Contains database for User information
         """
-        self.datafile = "Data/Users.db"
+        self.datafile = "Project/Data/Users.db"
         self.username = username
         self.password = password
 
@@ -101,7 +101,7 @@ class Users():
 
 #INITIALISE tests
 
-# tests = shelve.open("Data/Tests.db")
+# tests = shelve.open("Project/Data/Tests.db")
 # tests['Tests'] = []
 # tests.sync()
 # tests.close()
@@ -111,7 +111,7 @@ class Tests():
         """
             Contains database for Test information
         """
-        self.datafile = "Data/Tests.db"
+        self.datafile = "Project/Data/Tests.db"
         self.testNumber = testNumber
         self.testName = testName
         self.testContent = testContent
@@ -198,7 +198,7 @@ class Test_record():
         """
             Contains database for Test Records information
         """
-        self.datafile = "Data/Test_records.db"
+        self.datafile = "Project/Data/Test_records.db"
         self.user = user
         self.testNumber = testNumber
         self.trial = trial

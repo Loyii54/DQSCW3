@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
-from data import *
+from Project.data import *
 
 class formativeTestFeedback(Frame):
 

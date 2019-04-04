@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
-from data import *
+from Project.data import *
 
 class login(Frame):
 
@@ -29,9 +29,7 @@ class login(Frame):
             Tkinter widgets to be put in the frame in the canvas.
         """
         self.var_username = StringVar()
-        self.var_username.set('student')
         self.var_password = StringVar()
-        self.var_password.set('password')
 
         label_username = Label(self.frameInCanvas, text='Username: ')
         label_password = Label(self.frameInCanvas, text='Password: ')

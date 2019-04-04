@@ -1,7 +1,7 @@
 from tkinter import*
 from tkinter import messagebox
 import datetime
-from data import*
+from Project.data import *
 
 class createTest(Frame):
     def __init__(self, master):

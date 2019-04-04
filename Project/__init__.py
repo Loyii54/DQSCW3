@@ -1,19 +1,19 @@
 from tkinter import *
-from data import *
+from Project.data import *
 """ Import all frames in the application here """
-from student import student
-from login import login
-from takeTest import takeTest
-from summativeTestFeedback import summativeTestFeedback
-from viewAnswerStudent import viewAnswerStudent
-from lecturer import lecturer
-from createTest import createTest
-from formativeTestFeedback import formativeTestFeedback
-from Modify import Modify
-from modifyTest import modifyTest
-from viewTest import viewTest
-from viewTestSummativeLecturer import viewTestSummativeLecturer
-from viewIndividualTestSummativeLecturer import viewIndividualTestSummativeLecturer
+from Project.student import student
+from Project.login import login
+from Project.takeTest import takeTest
+from Project.summativeTestFeedback import summativeTestFeedback
+from Project.viewAnswerStudent import viewAnswerStudent
+from Project.lecturer import lecturer
+from Project.createTest import createTest
+from Project.formativeTestFeedback import formativeTestFeedback
+from Project.Modify import Modify
+from Project.modifyTest import modifyTest
+from Project.viewTest import viewTest
+from Project.viewTestSummativeLecturer import viewTestSummativeLecturer
+from Project.viewIndividualTestSummativeLecturer import viewIndividualTestSummativeLecturer
 
 class App(Tk):
     def __init__(self):
@@ -54,11 +54,9 @@ class App(Tk):
 
 
 
-def main():
-    app = App()
-    app.title('Application')
-    app.state('zoomed')
-    app.mainloop()
+app = App()
+app.title('Application')
+app.state('zoomed')
+app.mainloop()
 
-if __name__ == '__main__':
-    main()
+
