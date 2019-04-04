@@ -10,6 +10,11 @@ class login(Frame):
         """
         Frame.__init__(self,master)
 
+        """
+            Code To add Scrollbar to window derived from Steven Bryan Oakley at
+            https://stackoverflow.com/questions/3085696/adding-a-scrollbar-to-a-group-of-widgets-in-tkinter
+            Object-oriented solution
+        """
         self.canvas = Canvas(self, borderwidth=0)
         self.frameInCanvas = Frame(self.canvas)
         self.verticalScrollBar = Scrollbar(self, orient="vertical", command=self.canvas.yview)

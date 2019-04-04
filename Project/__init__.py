@@ -22,6 +22,15 @@ class App(Tk):
         """
         Tk.__init__(self)
 
+        """
+            Code To change frames derived from Steven M. Vascellaro at
+            https://stackoverflow.com/questions/7546050/switch-between-two-frames-in-tkinter
+            Multi-frame tkinter application v2.3
+        """
+        """
+            Scrollbar code at the start of each frame class is derived from Steven Bryan Oakley
+            Details on login.py
+        """
         self.current_frame = None
         self.pages = {'Login': login,
                  'Student': student,
