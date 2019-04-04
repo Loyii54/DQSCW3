@@ -14,6 +14,9 @@ from Project.modifyTest import modifyTest
 from Project.viewTest import viewTest
 from Project.viewTestSummativeLecturer import viewTestSummativeLecturer
 from Project.viewIndividualTestSummativeLecturer import viewIndividualTestSummativeLecturer
+from Project.statsGen import statsView,Result
+from Project.viewTestFormativeLecturer import viewTestFormativeLecturer
+from Project.viewIndividualTestFormativeLecturer import viewIndividualTestFormativeLecturer
 
 class App(Tk):
     def __init__(self):
@@ -44,7 +47,10 @@ class App(Tk):
                  'modifyTest': modifyTest,
                  'viewTest': viewTest,
                  'viewTestSummativeLecturer': viewTestSummativeLecturer,
-                 'viewIndividualTestSummativeLecturer': viewIndividualTestSummativeLecturer
+                 'viewIndividualTestSummativeLecturer': viewIndividualTestSummativeLecturer,
+                 'viewStats': statsView,
+                 'viewTestFormativeLecturer': viewTestFormativeLecturer,
+                 'viewIndividualTestFormativeLecturer': viewIndividualTestFormativeLecturer
                  }
 
         self.switch_frame('Login')

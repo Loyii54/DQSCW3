@@ -43,7 +43,7 @@ class lecturer(Frame):
         self.master.switch_frame('Login')
 
     def createTest(self):
-        tests = shelve.open("Data/Tests.db")
+        tests = shelve.open("Project/Data/Tests.db")
         tests['questionList'] = []
         tests.sync()
         tests.close()

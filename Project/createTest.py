@@ -22,7 +22,7 @@ class createTest(Frame):
         self.main()
 
     def main(self):
-        tests = shelve.open("Data/Tests.db")
+        tests = shelve.open("Project/Data/Tests.db")
         self.questionList = tests['questionList']
         tests.close()
 
@@ -97,7 +97,7 @@ class createTest(Frame):
             self.questionList.append(0)
         else:
             self.questionList.append(self.questionList[-1] + 1)
-        tests = shelve.open("Data/Tests.db")
+        tests = shelve.open("Project/Data/Tests.db")
         tests['questionList'] = self.questionList
         tests.sync()
         tests.close()
